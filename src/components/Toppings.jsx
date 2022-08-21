@@ -17,6 +17,15 @@ const containerVariants = {
 	},
 };
 
+const buttonVariant = {
+	hover: {
+		scale: 1.1,
+		textShadow: '0px 0px 8px rgb(255,255,255)',
+		boxShadow: '0px 0px 8px rgb(255,255,255)',
+		transition: { yoyo: Infinity, duration: 0.3 },
+	},
+};
+
 const Toppings = ({ addToppings, pizza }) => {
 	const toppings = [
 		'mushrooms',
@@ -59,14 +68,7 @@ const Toppings = ({ addToppings, pizza }) => {
 			</ul>
 
 			<Link to="/order">
-				<motion.button
-					whileHover={{
-						scale: 1.1,
-						textShadow: '0px 0px 8px rgb(255,255,255)',
-						boxShadow: '0px 0px 8px rgb(255,255,255)',
-					}}
-					transition={{ type: 'spring', stiffness: 200 }}
-				>
+				<motion.button variants={buttonVariant} whileHover="hover">
 					Order
 				</motion.button>
 			</Link>
