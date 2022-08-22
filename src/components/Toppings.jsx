@@ -15,6 +15,12 @@ const containerVariants = {
 			delay: 0.5,
 		},
 	},
+	exit: {
+		x: '-100vw',
+		transition: {
+			ease: 'easeInOut',
+		},
+	},
 };
 
 const buttonVariant = {
@@ -41,6 +47,7 @@ const Toppings = ({ addToppings, pizza }) => {
 			variants={containerVariants}
 			initial="hidden"
 			animate="visable"
+			exit="exit"
 		>
 			<h3>step 2: Choose Toppings</h3>
 

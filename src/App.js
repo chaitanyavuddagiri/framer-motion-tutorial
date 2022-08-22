@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Base, Header, Home, Order, Toppings } from './components';
+
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
 	const [pizza, setPizza] = useState({ base: '', toppings: [] });
+	const location = useLocation();
 
 	const addBase = (base) => {
 		setPizza({ ...pizza, base });
@@ -22,20 +25,22 @@ function App() {
 	return (
 		<>
 			<Header />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route
-					path="/base"
-					element={<Base addBase={addBase} pizza={pizza} />}
-				/>
-				<Route
-					path="/toppings"
-					element={
-						<Toppings addToppings={addToppings} pizza={pizza} />
-					}
-				/>
-				<Route path="/order" element={<Order pizza={pizza} />} />
-			</Routes>
+			<AnimatePresence exitBeforeEnter>
+				<Routes location={location} key={location.key}>
+					<Route path="/" element={<Home />} />
+					<Route
+						path="/base"
+						element={<Base addBase={addBase} pizza={pizza} />}
+					/>
+					<Route
+						path="/toppings"
+						element={
+							<Toppings addToppings={addToppings} pizza={pizza} />
+						}
+					/>
+					<Route path="/order" element={<Order pizza={pizza} />} />
+				</Routes>
+			</AnimatePresence>
 		</>
 	);
 }
